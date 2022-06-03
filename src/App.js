@@ -1,10 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
-import ProductDetail from './Pages/ProductDetail';
+import Navbar from './Pages/Navbar/Navbar';
+import ProductDetail from './Pages/ProductDetails/ProductDetail';
 
 function App() {
   return (
     <div className="App">
+      <Navbar />
       <ProductDetail />
     </div>
   );

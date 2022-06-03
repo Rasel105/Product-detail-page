@@ -1,32 +1,43 @@
 import React, { useEffect, useState } from 'react';
-import Swiper from 'react-id-swiper';
-const axios = require('axios');
+import Gallary from '../Gallary/Gallary';
 
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+
+const axios = require('axios');
 const ProductDetail = () => {
     const [products, setProducts] = useState({});
+    const [loader, setLoader] = useState(false)
 
     useEffect(() => {
         axios.get('https://moveon-api-server.sbox.ali2bd.net/api/v1/customer/dummy-product')
             .then(function (response) {
                 // handle success
                 setProducts(response.data);
+                setLoader(true);
             })
     }, [])
 
-    console.log(products);
+    if (loader) {
+        console.log(products);
+    }
 
     return (
-        <div className='grid md:grid-cols-2 sm:grid-cols-1'>
-            <div>
+        <div className='grid md:grid-cols-2 sm:grid-cols-1 container mx-auto'>
+            {loader && <div>
                 <h2>Hello Bangladesh</h2>
-                <Swiper>
-                    <div>Slide 1</div>
-                    <div>Slide 2</div>
-                    <div>Slide 3</div>
-                    <div>Slide 4</div>
-                    <div>Slide 5</div>
-                </Swiper>
-            </div>
+                <Carousel>
+                    <div>
+                        <img src={products?.gallery[0]?.url} alt="" />
+                    </div>
+                    <div>
+                        <img src={products?.gallery[1]?.url} alt="" />
+                    </div>
+                    <div>
+                        <img src={products?.gallery[2]?.url} alt="" />
+                    </div>
+                </Carousel>
+            </div>}
             <div>
                 <h2>Hello Bangladesh</h2>
             </div>
